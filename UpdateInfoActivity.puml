@@ -1,0 +1,32 @@
+@startuml Gymanice_Update_Info_Activity
+
+title Gymanice — Update Personal Information
+
+skinparam Activity {
+  BackgroundColor #AEC6EB
+  BorderColor #5D6D7E
+  DiamondBackgroundColor #AEC6EB
+  DiamondBorderColor #5D6D7E
+  ArrowColor #1A5276
+  FontName Arial
+}
+skinparam shadowing false
+
+start
+
+:Select Personal\nAcount;
+:Retrieve Personal\nInformation;
+:Display Personal\nInformation;
+:View Personal\nDetails;
+
+if (Update\nInformation?) then (Yes)
+  :Edit Personal\nInformation;
+  :Validate Updated\nInformation;
+  :Save\nUpdated\nInformation;
+  :Display\nUpdated\nInformation;
+else (No)
+endif
+
+end
+
+@enduml
