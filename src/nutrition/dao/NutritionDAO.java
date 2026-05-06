@@ -123,7 +123,7 @@ public class NutritionDAO {
     }
 
     public static boolean addMealToPlan(int planId, int mealId, int dayNumber) throws SQLException {
-        String sql = "INSERT OR IGNORE INTO meal_plan_items (plan_id,meal_id,day_number) VALUES (?,?,?)";
+        String sql = "INSERT IGNORE INTO meal_plan_items (plan_id,meal_id,day_number) VALUES (?,?,?)";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, planId);

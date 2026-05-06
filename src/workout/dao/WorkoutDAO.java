@@ -50,9 +50,13 @@ public class WorkoutDAO {
     public static boolean addExerciseToSchedule(int scheduleId, int exerciseId,
                                                   int sets, int reps, int weight) throws SQLException {
         String sql = """
-            INSERT OR REPLACE INTO schedule_exercises
+            INSERT INTO schedule_exercises
             (schedule_id,exercise_id,target_sets,target_reps,target_weight)
-            VALUES (?,?,?,?,?)""";
+            VALUES (?,?,?,?,?)
+            ON DUPLICATE KEY UPDATE
+              target_sets=VALUES(target_sets),
+              target_reps=VALUES(target_reps),
+              target_weight=VALUES(target_weight)""";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, scheduleId);

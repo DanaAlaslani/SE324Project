@@ -29,10 +29,10 @@ public class ProgressDAO {
             (trainee_id,record_date,weight_kg,height_cm,initial_weight_kg,target_weight_kg,
              progress_percent,predicted_completion)
             VALUES (?,?,?,?,?,?,?,?)
-            ON CONFLICT(trainee_id,record_date) DO UPDATE SET
-              weight_kg=excluded.weight_kg,
-              progress_percent=excluded.progress_percent,
-              predicted_completion=excluded.predicted_completion""";
+            ON DUPLICATE KEY UPDATE
+              weight_kg=VALUES(weight_kg),
+              progress_percent=VALUES(progress_percent),
+              predicted_completion=VALUES(predicted_completion)""";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
