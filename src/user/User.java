@@ -1,6 +1,7 @@
 package user;
 
 public abstract class User {
+    protected int userId;
     protected String username;
     protected String role;
     protected String password;
@@ -50,6 +51,8 @@ public abstract class User {
         System.out.println("Profile updated successfully.");
     }
 
+    public int    getUserId()   { return userId; }
+    public void   setUserId(int userId) { this.userId = userId; }
     public String getUsername() { return username; }
     public String getRole()     { return role; }
     public String getName()     { return name; }
