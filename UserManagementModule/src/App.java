@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 public class App {
 
-
-
     public static void main(String[] args) {
         System.out.println("Gymanice System Loaded successfully.");
         // You can test your objects here
