@@ -25,6 +25,7 @@ public class DatabaseConnection {
             Connection conn = getConnection();
             System.out.println("Connected to MySQL gymanice database.");
             seedIfEmpty(conn);
+            DataSeeder.seedIfEmpty();   // inserts sample users/schedules/plans if table is empty
         } catch (SQLException e) {
             System.err.println("DB connection error: " + e.getMessage());
         }
