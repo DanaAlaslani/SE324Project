@@ -1,0 +1,52 @@
+@startuml Gymanice_Trainee_Meal_Sequence
+ 
+skinparam sequence {
+  ArrowColor #1A5276
+  ActorBorderColor #2E86C1
+  LifeLineBorderColor #2E86C1
+  LifeLineBackgroundColor #D6EAF8
+  ParticipantBackgroundColor #EAF4FB
+  ParticipantBorderColor #2E86C1
+  ParticipantFontStyle Bold
+  BoxBackgroundColor #FDFEFE
+  BoxBorderColor #5D6D7E
+}
+skinparam ActorBackgroundColor #EAF4FB
+ 
+title Gymanice — Trainee Meal Plan Sequence
+ 
+actor Trainee as T
+ 
+box "module::Nutrition" #FDFEFE
+  participant "MealPlan" as MP
+  participant "Meal" as M
+  participant "calCulator" as Calc
+end box
+ 
+T -> MP : View meal plan
+activate MP
+MP --> T : Display Plan
+deactivate MP
+ 
+T -> M : View meal
+activate M
+M -> M : get recipe
+M --> T : View recipe
+deactivate M
+ 
+alt Custom meal flow
+    T -> M : Custom meal (upload Data)
+    
+    activate M
+    M -> Calc : Customed meal
+    activate Calc
+    Calc -> Calc : (Calculate)
+    Calc --> MP : Calculated macros
+    deactivate Calc
+    deactivate M
+    activate MP
+    MP --> T : Display macros
+    deactivate MP
+end
+ 
+@enduml

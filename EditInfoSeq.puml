@@ -1,0 +1,37 @@
+skinparam sequence {
+  ArrowColor #1A5276
+  ActorBorderColor #2E86C1
+  LifeLineBorderColor #2E86C1
+  LifeLineBackgroundColor #D6EAF8
+  ParticipantBackgroundColor #EAF4FB
+  ParticipantBorderColor #2E86C1
+  ParticipantFontStyle Bold
+  BoxBackgroundColor #FDFEFE
+  BoxBorderColor #5D6D7E
+}
+skinparam ActorBackgroundColor #EAF4FB
+ 
+title Gymanice — View & Edit Information Sequence
+ 
+actor Trainee as T
+ 
+box "module::UserManagement" #EBF5FB
+  participant "User : Trainee" as UT
+end box
+ 
+database "DataBase" as DB
+ 
+T -> UT : View information
+activate UT
+UT --> T : Display information
+deactivate UT
+ 
+T -> UT : Edit Information
+activate UT
+UT -> DB : Update database
+activate DB
+deactivate DB
+UT --> T : Display : Information updated
+deactivate UT
+ 
+@enduml

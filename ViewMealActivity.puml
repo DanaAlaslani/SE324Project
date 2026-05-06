@@ -1,0 +1,26 @@
+@startuml
+title View Meal Plan
+
+start
+
+:View Meal Plan;
+
+:View Meal;
+
+if (Change Meal?) then (YES)
+  :Enter New Meal;
+  :upload Data;
+  :Calculate macros using Calculator;
+  :Add to meal Plan;
+ 
+else (NO)
+endif
+
+:Show recipe;
+
+:Move to the next meal;
+
+stop
+
+@enduml
+

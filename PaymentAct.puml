@@ -1,0 +1,40 @@
+@startuml
+|Trainee|
+|Payment System|
+|Trainee|
+
+|Trainee|
+start
+:Choose Payment Method;
+:Enter Payment Details;
+:Make Payment;
+
+|Payment System|
+if (Payment Details Valid?) then (Yes)
+  :Process Payment;
+  if (Payment Successful?) then (Yes)
+    |Trainee|
+    :Transmit Payment;
+    |Payment System|
+    :Send Receipt;
+    :Show Error Message;
+  else (No)
+    :Show Error Message;
+    |Trainee|
+    :Enter Payment Details;
+  endif
+else (No)
+  :Show Error Message;
+  |Trainee|
+  :Enter Payment Details;
+endif
+
+|Payment System|
+:Send Receipt;
+
+|Trainee|
+:Display Success Message;
+:Update user account;
+stop
+
+@enduml

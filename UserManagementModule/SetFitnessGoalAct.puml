@@ -1,0 +1,21 @@
+@startuml
+title Set Fitness Goal
+
+start
+
+:Enter Fitness Goal;
+
+:Enter Health Matrice;
+
+:Calculate BMI;
+
+:Calculate Daily Calories;
+
+:Confirm Information;
+
+:Save Data;
+
+stop
+
+@enduml
+

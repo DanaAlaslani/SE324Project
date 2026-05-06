@@ -1,0 +1,70 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam usecase {
+  BackgroundColor White
+  BorderColor Black
+}
+
+actor "Trainer/Nutritionist" as TN
+actor "Trainee" as T
+actor "Calculator" as C
+actor "Payment System" as PS
+
+rectangle Gymnanc {
+  usecase "Login" as UC1
+  usecase "Reset Password" as UC2
+  usecase "Set fitness goal" as UC3
+  usecase "Set health metrics" as UC4
+  usecase "Set Workout Schedule" as UC5
+  usecase "Enter meals" as UC6
+  usecase "Set meal plan" as UC7
+  usecase "Calculate Macros Per meal" as UC8
+  usecase "View Workout Schedule" as UC9
+  usecase "View Meal Plan" as UC10
+  usecase "View Progress" as UC11
+  usecase "View Personal Information" as UC12
+  usecase "Make Payment" as UC13
+  usecase "Process Payment" as UC14
+  usecase "Send Payment Receipt" as UC15
+}
+
+' Trainer/Nutritionist use cases
+TN --> UC1
+TN --> UC2
+TN --> UC3
+
+' Trainee use cases
+T --> UC1
+T --> UC5
+T --> UC6
+T --> UC7
+T --> UC9
+T --> UC10
+T --> UC11
+T --> UC12
+T --> UC13
+
+' Include and extend relationships based on your diagram
+
+' Login extend Reset Password
+UC1 <. UC2 : <<extend>>
+
+' Set fitness goal include Set health metrics
+UC3 ..> UC4 : <<include>>
+
+' Set meal plan include Calculate Macros Per meal
+UC7 ..> UC8 : <<include>>
+
+' Calculator extends Calculate Macros
+C <.. UC8 : <<extend>>
+
+' Calculator views meal plan
+C --> UC10
+
+' Payment System processes payment with includes
+PS --> UC13
+UC13 ..> UC14 : <<include>>
+UC13 ..> UC15 : <<include>>
+
+@enduml
