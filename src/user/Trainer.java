@@ -8,7 +8,7 @@ public class Trainer extends User {
     public Trainer(String username, String password, String name, String dob,
                    String email, String phone,
                    float fee, String credentials, String specialization) {
-        super(username, "Trainer", password, name, dob, email, phone);
+        super(username, "TRAINER", password, name, dob, email, phone);
         this.fee = fee;
         this.credentials = credentials;
         this.specialization = specialization;

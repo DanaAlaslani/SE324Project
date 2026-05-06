@@ -10,7 +10,7 @@ public class Trainee extends User {
     public Trainee(String username, String password, String name,
                    String dob, String email, String phone,
                    float height, float weight, int age, String fitnessGoal) {
-        super(username, "Trainee", password, name, dob, email, phone);
+        super(username, "TRAINEE", password, name, dob, email, phone);
         this.height = height;
         this.weight = weight;
         this.age = age;
