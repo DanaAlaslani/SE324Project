@@ -1,0 +1,75 @@
+@startuml Gymanice_Payment_Sequence
+
+skinparam sequence {
+  ArrowColor #1A5276
+  ActorBorderColor #2E86C1
+  LifeLineBorderColor #2E86C1
+  LifeLineBackgroundColor #D6EAF8
+  ParticipantBackgroundColor #EAF4FB
+  ParticipantBorderColor #2E86C1
+  ParticipantFontStyle Bold
+  BoxBackgroundColor #FDFEFE
+  BoxBorderColor #5D6D7E
+}
+skinparam ActorBackgroundColor #EAF4FB
+
+title Gymanice — Payment Processing Sequence
+
+actor Trainee as T
+
+
+box "module::Application" #EBF5FB
+  participant "Payment Screen" as PS_Screen
+end box
+
+box "module::Payment" #FDFEFE
+  participant "PymentService" as PS
+  participant "BankGateway" as BG
+end box
+
+T -> PS_Screen : Click "Pay Now"
+activate PS_Screen
+
+PS_Screen -> PS : MakePayment
+activate PS
+
+PS -> BG : ProcessPayment
+activate BG
+
+BG -> BG : Verify payment authorization
+
+alt Payment Authorized
+    
+    BG --> PS : PaymentSuccess
+    
+    PS --> PS_Screen : confirmPayment()
+    
+    PS -> PS : calculateSystemCommission(5%)
+    PS -> PS : calculateTrainerAmount(95%)
+    
+    PS -> TR : transfer To Trainer Account
+    activate TR
+    TR --> PS : transferConfirmed
+    deactivate TR
+    
+    PS --> PS_Screen : sendReceipt(transactionID)
+    
+    PS_Screen --> T : displayRecipt()
+    
+    PS_Screen -> PS_Screen : updateSubscriptionState
+    PS_Screen --> T : sendReceiptEmail
+
+else payment declined
+
+    BG --> PS : paymentDeclined(reason)
+    deactivate BG
+    
+    PS --> PS_Screen : paymentFaild(reason)
+    deactivate PS
+    
+    PS_Screen --> T : showErroreMessage
+    deactivate PS_Screen
+
+end
+
+@enduml
